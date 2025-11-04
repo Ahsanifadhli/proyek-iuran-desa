@@ -104,13 +104,13 @@
 
                 <div class="login-body">
 
-                    {{-- PERUBAHAN 1: Form action diarahkan ke RUTE 'login.store' --}}
+                    {{-- Form action diarahkan ke RUTE 'login.store' --}}
                     <form action="{{ route('login.store') }}" method="POST">
 
-                        {{-- PERUBAHAN 2: Tambahkan @csrf (WAJIB untuk keamanan Laravel) --}}
+                        {{-- Menambahkan @csrf (WAJIB untuk keamanan Laravel) --}}
                         @csrf
 
-                        {{-- PERUBAHAN 3: Menampilkan error jika login gagal (dari LoginController) --}}
+                        {{-- Menampilkan error jika login gagal (dari LoginController) --}}
                         @if ($errors->any())
                             <div class="alert alert-danger" role="alert">
                                 {{ $errors->first('username') }}
@@ -119,7 +119,7 @@
 
                         <div class="mb-4 position-relative">
                             <i class="fas fa-user input-icon"></i>
-                            {{-- Tambahkan value="old('username')" agar username tidak hilang jika login gagal --}}
+
                             <input type="text" class="form-control" placeholder="Username" name="username" value="{{ old('username') }}" required>
                         </div>
 
@@ -135,7 +135,7 @@
                 </div>
             </div>
             <div class="text-center mt-3">
-                {{-- Mengganti sintaks PHP lama dengan Blade --}}
+
                 <p class="mb-0 text-white-50 small">Aplikasi Sistem Iuran Warga &copy; {{ date('Y') }}</p>
             </div>
         </div>

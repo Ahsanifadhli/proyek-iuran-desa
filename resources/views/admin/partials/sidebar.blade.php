@@ -7,7 +7,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-white" href="#">
+            <a class="nav-link text-white" href="{{ route('admin.manage-user') }}">
                 <i class="fas fa-users me-2"></i> Kelola Pengguna
             </a>
         </li>
