@@ -235,29 +235,31 @@
                                 <div class="contact-info">
                                     <div class="contact-item mb-3">
                                         <i class="fas fa-map-marker-alt text-primary me-3"></i>
-                                        <span>Jl. Sukamaju No. 123, Desa Sukamaju</span>
+                                        <span>Perumahan Citra Kebun Mas, Desa Bengle, Kecamatan Majalaya, Kabupaten Karawang</span>
                                     </div>
                                     <div class="contact-item mb-3">
                                         <i class="fas fa-envelope text-primary me-3"></i>
-                                        <span>admin@desasukamaju.id</span>
+                                        <span>ahsani.fadhli@gmail.com</span>
                                     </div>
                                     <div class="contact-item">
                                         <i class="fas fa-phone-alt text-primary me-3"></i>
-                                        <span>0812-3456-7890</span>
+                                        <span>0821-2350-3751</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <h4 class="fw-bold mb-4">Kirim Pesan</h4>
-                                <form>
+                                <form action="{{ route('kirim-kontak') }}" method="post">
+
+                                @csrf
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" placeholder="Nama Anda">
+                                        <input type="text" class="form-control" placeholder="Nama Anda" name="name" required>
                                     </div>
                                     <div class="mb-3">
-                                        <input type="email" class="form-control" placeholder="Email Anda">
+                                        <input type="email" class="form-control" placeholder="Email Anda" name="email" required>
                                     </div>
                                     <div class="mb-3">
-                                        <textarea class="form-control" rows="3" placeholder="Pesan Anda"></textarea>
+                                        <textarea class="form-control" rows="3" placeholder="Pesan Anda" name="body" required></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-primary w-100">Kirim Pesan</button>
                                 </form>
@@ -283,8 +285,8 @@
                 <div class="col-md-6 text-md-end">
                     <div class="social-links">
                         <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.instagram.com/ahsanifadhli_official" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="wa.me/6282123503751" class="text-white"><i class="fab fa-whatsapp"></i></a>
                     </div>
                     <p class="mb-0 mt-2">&copy; 2025 | Sistem Iuran Warga. By: Ahsani Fadhli Ilahi.</p>
                 </div>

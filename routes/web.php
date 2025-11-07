@@ -10,6 +10,13 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\UserController; // Akan kita gunakan
 use App\Http\Controllers\RtRw\DashboardController as RtRwDashboard;
 use App\Http\Controllers\Warga\DashboardController as WargaDashboard;
+use App\Http\Controllers\SendEmailController;
+
+Route::get('/send-mail', [SendEmailController::class, 'index'])->name('kirim-email');
+
+Route::post('/post-email', [SendEmailController::class, 'store'])->name('post-email');
+
+Route::post('/kirim-kontak', [SendEmailController::class, 'handleContactForm'])->name('kirim-kontak');
 
 
 Route::get('/', function () {
