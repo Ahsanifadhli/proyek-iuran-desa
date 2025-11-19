@@ -12,7 +12,8 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-white" href="#">
+            {{-- INI YANG DIPERBAIKI: Route diubah ke admin.kelola_iuran.index --}}
+            <a class="nav-link text-white" href="{{ route('admin.kelola_iuran.index') }}">
                 <i class="fas fa-file-invoice-dollar me-2"></i> Kelola Iuran
             </a>
         </li>

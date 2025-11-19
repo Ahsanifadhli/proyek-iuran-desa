@@ -8,15 +8,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('rw', function (Blueprint $table) {
-            $table->id('id_rw');
-            $table->string('no_rw');
+        Schema::create('rt', function (Blueprint $table) {
+            $table->id('id_rt');
+            $table->string('no_rt');
+            $table->foreignId('id_rw')->constrained('rw', 'id_rw'); // Nyambung ke 'rw'
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('rw');
+        Schema::dropIfExists('rt');
     }
 };

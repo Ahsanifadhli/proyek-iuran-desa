@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Admin Dashboard') - Iuran Desa</title>
 
+    {{-- INI CSS-MU (BOOTSTRAP) --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 
@@ -47,6 +48,7 @@
             @include('admin.partials.header')
 
             <main>
+                {{-- Di sinilah halamanmu (kelola_iuran) akan dimuat --}}
                 @yield('content')
             </main>
 
@@ -55,9 +57,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     @stack('scripts')
 
 </body>

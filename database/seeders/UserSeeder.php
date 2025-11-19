@@ -2,69 +2,61 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
-use App\Models\User; // <-- 1. Panggil Model User
-use Illuminate\Support\Facades\Hash; // <-- 2. Panggil Hash untuk enkripsi password
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Jalankan seeder database.
      */
     public function run(): void
     {
-        // Kita akan menggunakan 'firstOrCreate'
-        // Ini akan mengecek apakah user dgn 'username' tsb sudah ada.
-        // Jika belum, baru akan dibuat. Ini mencegah duplikat.
+        // 1. User Admin/Pencatat (ID: 1) - Digunakan sebagai 'Dicatat Oleh' di pembayaran
+        User::create([
+            'id_user' => 1,
+            'nama_lengkap' => 'Admin Pencatat',
+            'username' => 'admin',
+            'email' => 'admin@rtku.id',
+            'password' => Hash::make('password'),
+            'role' => 'Admin',
+            'is_active' => true,
+        ]);
 
-        // 1. Buat User Admin
-        User::firstOrCreate(
-            ['username' => 'admin'], // Kunci untuk mengecek
-            [
-                'nama_lengkap' => 'Administrator Web',
-                'password' => Hash::make('123456'), // Password: 123456
-                'role' => 'Admin',
-                'email' => 'admin@iuran.com',
-                'is_active' => 1
-            ]
-        );
+        // 2. User Biasa (ID: 2) - Untuk Warga yang tidak menjadi pencatat/admin
+        User::create([
+            'id_user' => 2,
+            'nama_lengkap' => 'Budi Setiawan',
+            'username' => 'budi',
+            'email' => 'budi@rtku.id',
+            'password' => Hash::make('password'),
+            'role' => 'Warga',
+            'is_active' => true,
+        ]);
 
-        // 2. Buat User RT
-        User::firstOrCreate(
-            ['username' => 'rt01'], // Kunci untuk mengecek
-            [
-                'nama_lengkap' => 'Bapak RT 01',
-                'password' => Hash::make('123456'), // Password: 123456
-                'role' => 'RT',
-                'email' => 'rt01@iuran.com',
-                'is_active' => 1
-            ]
-        );
+        User::create([
+            'id_user' => 3,
+            'nama_lengkap' => 'Hanako Suzuka',
+            'username' => 'hanako',
+            'email' => 'hanako@rtku.id',
+            'password' => Hash::make('password'),
+            'role' => 'Warga',
+            'is_active' => true,
+        ]);
 
-        // 3. Buat User RW
-        User::firstOrCreate(
-            ['username' => 'rw01'], // Kunci untuk mengecek
-            [
-                'nama_lengkap' => 'Bapak RW 01',
-                'password' => Hash::make('123456'), // Password: 123456
-                'role' => 'RW',
-                'email' => 'rw01@iuran.com',
-                'is_active' => 1
-            ]
-        );
+        User::create([
+            'id_user' => 4,
+            'nama_lengkap' => 'Ogura Tatsumi',
+            'username' => 'ogura',
+            'email' => 'ogura@rtku.id',
+            'password' => Hash::make('password'),
+            'role' => 'Warga',
+            'is_active' => true,
+        ]);
 
-        // 4. Buat User Warga
-        User::firstOrCreate(
-            ['username' => 'warga1'], // Kunci untuk mengecek
-            [
-                'nama_lengkap' => 'Warga Biasa 1',
-                'password' => Hash::make('123456'), // Password: 123456
-                'role' => 'Warga',
-                'email' => 'warga1@iuran.com',
-                'is_active' => 1
-            ]
-        );
 
-        // Anda bisa tambahkan data dummy lainnya di sini
+
+
     }
 }
