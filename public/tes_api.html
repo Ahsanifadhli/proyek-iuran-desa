@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tes Konsumsi API Iuran Desa</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .judul { font-weight: bold; font-size: 1.2em; color: #2c3e50; }
+        .harga { color: #27ae60; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h2>Daftar Tagihan Desa (Dari API)</h2>
+    <div id="daftar-tagihan">
+        Loading data...
+    </div>
+
+    <script>
+        // URL API yang sudah kita buat tadi
+        const apiUrl = '/api/tagihan';
+
+        // Fungsi untuk mengambil data (Fetch)
+        fetch(apiUrl)
+            .then(response => response.json()) // Ubah respon jadi JSON
+            .then(json => {
+                // Sesuai struktur JSON tadi: json.data.data
+                const listTagihan = json.data.data;
+                let htmlContent = '';
+
+                // Looping setiap tagihan
+                listTagihan.forEach(tagihan => {
+                    htmlContent += `
+                        <div class="card">
+                            <div class="judul">${tagihan.nama_tagihan}</div>
+                            <div class="harga">Rp ${parseFloat(tagihan.jumlah).toLocaleString('id-ID')}</div>
+                            <small>Diupdate: ${new Date(tagihan.updated_at).toLocaleDateString()}</small>
+                        </div>
+                    `;
+                });
+
+                // Masukkan ke dalam HTML
+                document.getElementById('daftar-tagihan').innerHTML = htmlContent;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('daftar-tagihan').innerHTML = 'Gagal mengambil data API.';
+            });
+    </script>
+
+</body>
+</html>

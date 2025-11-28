@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Pengguna Iuran Desa</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background-color: #f4f6f8; }
+        h2 { color: #333; text-align: center; }
+
+        /* Grid Layout biar rapi */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Card Style */
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            border-left: 5px solid #3498db; /* Warna default biru */
+        }
+        .card:hover { transform: translateY(-5px); }
+
+        /* Warna khusus beda Role */
+        .card.admin { border-left-color: #e74c3c; } /* Merah untuk Admin */
+        .card.warga { border-left-color: #2ecc71; } /* Hijau untuk Warga */
+
+        .nama { font-size: 1.2em; font-weight: bold; margin-bottom: 5px; color: #2c3e50; }
+        .role {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            color: white;
+            background-color: #95a5a6;
+            margin-bottom: 10px;
+        }
+        .role.Admin { background-color: #e74c3c; }
+        .role.Warga { background-color: #2ecc71; }
+
+        .info { color: #7f8c8d; font-size: 0.9em; margin-bottom: 3px; }
+    </style>
+</head>
+<body>
+
+    <h2>👥 Daftar Pengguna Sistem Iuran Desa</h2>
+
+    <div id="loading" style="text-align: center;">Sedang mengambil data...</div>
+    <div class="container" id="daftar-users"></div>
+
+    <script>
+        // 1. Alamat API Users kita
+        const apiUrl = '/api/users';
+
+        // 2. Ambil data
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(json => {
+                // Hilangkan loading
+                document.getElementById('loading').style.display = 'none';
+
+                const listUsers = json.data.data; // Masuk ke array data
+                let htmlContent = '';
+
+                // 3. Loop setiap user
+                listUsers.forEach(user => {
+                    // Cek role buat warna border (opsional biar cantik)
+                    const roleClass = user.role === 'Admin' ? 'admin' : 'warga';
+
+                    htmlContent += `
+                        <div class="card ${roleClass}">
+                            <div class="nama">${user.nama_lengkap}</div>
+                            <span class="role ${user.role}">${user.role}</span>
+                            <div class="info">📧 ${user.email}</div>
+                            <div class="info">👤 Username: ${user.username}</div>
+                            <div class="info" style="font-size: 0.8em; margin-top: 10px; color: #aaa;">
+                                Terdaftar: ${new Date(user.created_at).toLocaleDateString()}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                // 4. Tampilkan ke layar
+                document.getElementById('daftar-users').innerHTML = htmlContent;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('loading').innerHTML = '❌ Gagal mengambil data API.';
+            });
+    </script>
+
+</body>
+</html>
